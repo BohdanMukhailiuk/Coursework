@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Стати репетитором
+{% endblock %}
+
+
+{% block content %}
+        <h1>Стати репетитором</h1>
+        <form method="post">
+                {% csrf_token %}
+                {{ form.last_name }}<br>
+                {{ form.first_name }}<br>
+                {{ form.surname }}<br>
+                {{ form.subject }}<br>
+                {{ form.price_per_hour }}<br>
+                {{ form.specialization }}<br>
+                {{ form.experience }}<br>
+                {{ form.extra_information }}<br>
+                <button type="submit" class="btn btn-success">Додати</button>
+                <span>{{ error }}</span>
+        </form>
+{% endblock %}
+
