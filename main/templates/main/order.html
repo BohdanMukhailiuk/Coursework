@@ -11,12 +11,12 @@
                 {% for el in tasks %}
                         {% if el.check == True %}
                                 <div class="alert alert-warning mt-2">
-                                        <h3>{{ el.last_name }} {{ el.first_name }} {{ el.surname }}</h3>
-                                        <p>Назва предмету викладання: {{ el.subject }}</p>
-                                        <p>Ціна заняття за годину: {{ el.price_per_hour }}</p>
-                                        <p>Напрямок викладання: {{ el.specialization }}</p>
-                                        <p>Стаж роботи: {{ el.experience }}</p>
-                                        <p>Додаткова інформація: {{ el.extra_information }}</p>
+                                    <h3>{{ el.last_name }} {{ el.first_name }} {{ el.surname }}</h3>
+                                    <p>Назва предмету викладання: {{ el.subject }}</p>
+                                    <p>Ціна заняття за годину: {{ el.price_per_hour }}</p>
+                                    <p>Напрямок викладання: {{ el.specialization }}</p>
+                                    <p>Стаж роботи: {{ el.experience }}</p>
+                                    <p>Додаткова інформація: {{ el.extra_information }}</p>
                                 </div>
                         {% endif %}
                 {% endfor %}
