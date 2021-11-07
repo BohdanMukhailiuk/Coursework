@@ -9,6 +9,8 @@
         <h1>Стати репетитором</h1>
         <form method="post">
                 {% csrf_token %}
+                <br>
+                {{ form.image }}<br>
                 {{ form.last_name }}<br>
                 {{ form.first_name }}<br>
                 {{ form.surname }}<br>

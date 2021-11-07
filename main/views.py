@@ -27,7 +27,7 @@ def teachers(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('main:home')
         else:
             error = "Форма вказана не вірно"
 
@@ -49,7 +49,7 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('main:home')
     else:
         form = UserCreationForm()
     return render(request, 'main/register.html', {'form': form})
@@ -67,7 +67,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('main:login')
     else:
         form = SignUpForm()
     return render(request, 'main/register.html', {'form': form})
