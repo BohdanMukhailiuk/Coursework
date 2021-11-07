@@ -3,12 +3,12 @@ from django.forms import ModelForm, TextInput, Textarea, CheckboxInput
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from PIL import Image
 
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ["first_name", "last_name", "surname", "subject", "price_per_hour", "specialization", "experience", "extra_information", "check"]
+        fields = ["first_name", "last_name", "surname", "subject", "price_per_hour", "specialization", "experience", "extra_information", "check", "image"]
         widgets = {
 
             "last_name": TextInput(attrs={
@@ -53,7 +53,11 @@ class TaskForm(ModelForm):
 
             "check": CheckboxInput(attrs={
                 "class": "form-control",
-            })
+            }),
+
+            # "image": TextInput(attrs={
+            #     "class": "form-control",
+            # }),
 
         }
 
@@ -71,5 +75,7 @@ class SignUpForm(UserCreationForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+
 
 
