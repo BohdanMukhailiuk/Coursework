@@ -3,7 +3,6 @@ from django.forms import ModelForm, TextInput, Textarea, CheckboxInput
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from PIL import Image
 
 class TaskForm(ModelForm):
     class Meta:
