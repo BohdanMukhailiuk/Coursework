@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Сторінка про викладачів
+{% endblock %}
+
+
+{% block content %}
+        <h1>Тут ви можете залишити свій коментар про викладача</h1>
+        {% if tasks %}
+                {% for el in tasks %}
+                        {% if el.check == True %}
+                                <div class="alert alert-warning mt-2">
+                                    <h3>{{ el.last_name }} {{ el.first_name }} {{ el.surname }}</h3>
+                                    <p>{% if el.image %}
+                                        <img src="{{ el.image.url }}" alt="media">
+                                    {% endif %}</p>
+                                    <p>Назва предмету викладання: {{ el.subject }}</p>
+                                    <p>Ціна заняття за годину: {{ el.price_per_hour }}</p>
+                                    <p>Напрямок викладання: {{ el.specialization }}</p>
+                                    <p>Стаж роботи: {{ el.experience }}</p>
+                                    <p>Додаткова інформація: {{ el.extra_information }}</p>
+                                    <div><a href="{% url 'main:about' %}">Коментарі</a></div>
+                                    <div><a href="{% url 'main:comment' %}">Коментарі</a></div>
+                                </div>
+                        {% endif %}
+                {% endfor %}
+        {% endif %}
+{% endblock %}
+
