@@ -1,4 +1,4 @@
-from .models import Task
+from .models import Task, LeaveFeedBack
 from django.forms import ModelForm, TextInput, Textarea, CheckboxInput
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -54,9 +54,7 @@ class TaskForm(ModelForm):
                 "class": "form-control",
             }),
 
-            # "image": TextInput(attrs={
-            #     "class": "form-control",
-            # }),
+
 
         }
 
@@ -76,5 +74,17 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
+class LeaveFeedBackForm(ModelForm):
+    class Meta:
+        model = LeaveFeedBack
+        fields = ("feedback", )
+        widgets = {
+
+            "feedback": Textarea(attrs={
+                "class": "form-control",
+                "placeholder": "Залишіть свій коментар тут"
+            }),
+
+        }
 
 
