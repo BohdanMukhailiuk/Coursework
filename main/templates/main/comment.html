@@ -20,11 +20,21 @@
                                     <p>Напрямок викладання: {{ el.specialization }}</p>
                                     <p>Стаж роботи: {{ el.experience }}</p>
                                     <p>Додаткова інформація: {{ el.extra_information }}</p>
-                                    <div><a href="{% url 'main:about' %}">Коментарі</a></div>
-                                    <div><a href="{% url 'main:comment' %}">Коментарі</a></div>
+                                    <div><a href="{% url 'main:about' %}">Переглянути коментарі</a></div>
+                                    <div><a href="{% url 'main:comment' %}">Залишити коментар</a></div>
                                 </div>
                         {% endif %}
                 {% endfor %}
         {% endif %}
+
+    <form method="post">
+                {% csrf_token %}
+                <br>
+                Залишіть коментар
+                {{ form.feedback }}
+                <br>
+                <button type="submit" class="btn btn-success">Додати</button>
+                <span>{{ error }}</span>
+        </form>
 {% endblock %}
 
