@@ -21,3 +21,6 @@ class Task(models.Model):
         verbose_name_plural = 'Репетитори'
 
 
+class LeaveFeedBack(models.Model):
+    feedback = models.TextField(verbose_name="Ви можете зилишити свій коментар тут")
+
