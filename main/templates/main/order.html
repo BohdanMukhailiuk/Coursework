@@ -20,10 +20,12 @@
                                     <p>Напрямок викладання: {{ el.specialization }}</p>
                                     <p>Стаж роботи: {{ el.experience }}</p>
                                     <p>Додаткова інформація: {{ el.extra_information }}</p>
+                                    <div><a href="{% url 'main:about' %}">Переглянути коментарі</a></div>
+                                    <div><a href="{% url 'main:comment' %}">Залишити коментар</a></div>
                                 </div>
                         {% endif %}
                 {% endfor %}
-<!--        {% else %}-->
-<!--                <p>У нас немає репетиторів</p>-->
-<!--        {% endif %}-->
+        {% endif %}
 {% endblock %}
+
+
