@@ -8,9 +8,10 @@ urlpatterns = [
 
     path('', views.index, name="home"),
     path('about', views.about, name="about"),
+    path('comment', views.comment, name="comment"),
     path('order', views.order, name="order"),
     path('teachers', views.teachers, name="teachers"),
     path('register', views.register, name="register"),
-    path('login', views.user_login, name="login"),
+    path('login', views.CustomLoginView.as_view(), name="login"),
 
 ]
