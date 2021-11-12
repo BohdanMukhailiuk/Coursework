@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -12,6 +13,7 @@ class Task(models.Model):
     experience = models.CharField(verbose_name="Стаж роботи", max_length=50)
     extra_information = models.TextField(verbose_name="Додаткова інформація")
     check = models.BooleanField(default=False)
+    email = models.EmailField(verbose_name="Електронна пошта", max_length=254, null=True)
 
     def __str__(self):
         return "{} {} {} {} {}".format(self.last_name, self.first_name, self.surname, self.subject, self.price_per_hour, self.image)
@@ -22,5 +24,7 @@ class Task(models.Model):
 
 
 class LeaveFeedBack(models.Model):
-    feedback = models.TextField(verbose_name="Ви можете зилишити свій коментар тут")
+    feedback = models.TextField(verbose_name="Ви можете зилишити свій коментар тут", null=True)
+    name = models.CharField(verbose_name="ПІБ", max_length=100, null=True)
+    check = models.BooleanField(default=False, null=True)
 
