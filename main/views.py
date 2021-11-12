@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from .models import Task, LeaveFeedBack
 from .forms import TaskForm, LeaveFeedBackForm
@@ -5,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
 from .forms import SignUpForm
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
 
@@ -22,13 +24,11 @@ def index(request):
 def about(request):
     tasks = Task.objects.order_by("id")[0:1]
     feedbacks = LeaveFeedBack.objects.order_by("id")
-    name = request.user
 
     context = {
         "title": "Тут ви можете залишити свій коментар про викладача",
         "tasks": tasks,
         "feedbacks": feedbacks,
-        "name": name,
 
     }
 
@@ -42,7 +42,6 @@ def comment(request):
     if request.method == "POST":
         form = LeaveFeedBackForm(request.POST)
         if form.is_valid():
-            # form.instance.user = request.user
             form.save()
             return redirect('main:home')
         else:
@@ -100,4 +99,11 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'main/register.html', {'form': form})
+
+
+def logout_request(request):
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return redirect("main:home")
+    # return render(request, "main/logout.html")
 
