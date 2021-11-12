@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ["first_name", "last_name", "surname", "subject", "price_per_hour", "specialization", "experience", "extra_information", "check", "image"]
+        fields = ["first_name", "last_name", "surname", "subject", "price_per_hour", "specialization", "experience", "extra_information", "check", "image", "email"]
         widgets = {
 
             "last_name": TextInput(attrs={
@@ -54,6 +54,10 @@ class TaskForm(ModelForm):
                 "class": "form-control",
             }),
 
+            "email": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Введіть електронну пошту для зв'язку"
+            }),
 
 
         }
@@ -72,18 +76,38 @@ class SignUpForm(UserCreationForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+    # email = forms.EmailField(label=('Enter your new email'), max_length=200)
+    #
+    # def __init__(self, user, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.user = user
+    #
+    # def save(self):
+    #     self.user.email = self.cleaned_data['email']
+    #     self.user.save()
+
 
 
 class LeaveFeedBackForm(ModelForm):
     class Meta:
         model = LeaveFeedBack
-        fields = ("feedback", )
+        fields = ("feedback", "check", "name", )
         widgets = {
 
             "feedback": Textarea(attrs={
                 "class": "form-control",
                 "placeholder": "Залишіть свій коментар тут"
             }),
+
+            "check": CheckboxInput(attrs={
+                "class": "form-control",
+            }),
+
+            "name": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Введіть ваше ПІБ"
+            }),
+
 
         }
 
