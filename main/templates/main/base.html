@@ -18,8 +18,10 @@
             <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'main:home' %}">Головна</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'main:order' %}">Замовити репетиторство</a>
             <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'main:teachers' %}">Стати репетитором</a>
-            <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'main:login' %}">Увійти</a>
-            <a class="header_link__3Jd0t styles_link__1Bu32" id="login" href="{% url 'main:register' %}" data-qa-id="login-btn" target="_self"><div class="header_loginIcon__EfLc2"><svg width="19" height="21" viewBox="-1 0 19 21" xmlns="http://www.w3.org/2000/svg"><path d="M7.334 4.439a.667.667 0 00-.417 1.16l4.07 3.735H.701a.74.74 0 00-.07 0 .694.694 0 00-.632.702c.019.349.353.65.702.632h10.284l-4.07 3.729a.667.667 0 10.904.979l5.333-4.889a.667.667 0 000-.98L7.82 4.62a.667.667 0 00-.486-.18M11.743.002a.667.667 0 10.07 1.333h4.666v17.332h-4.666a.667.667 0 00-.02 1.334h5.353a.667.667 0 00.666-.667V.668a.667.667 0 00-.666-.666h-5.333a.635.635 0 00-.07 0" fill="#8A959E" fill-rule="evenodd"></path></svg></div>Реєстрація</a>
+            {% if not user.is_authenticated %}<a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'main:login' %}">Увійти</a>{% endif %}
+            {% if not user.is_authenticated %}<a class="header_link__3Jd0t styles_link__1Bu32" id="login" href="{% url 'main:register' %}" data-qa-id="login-btn" target="_self"><div class="header_loginIcon__EfLc2"><svg width="19" height="21" viewBox="-1 0 19 21" xmlns="http://www.w3.org/2000/svg"><path d="M7.334 4.439a.667.667 0 00-.417 1.16l4.07 3.735H.701a.74.74 0 00-.07 0 .694.694 0 00-.632.702c.019.349.353.65.702.632h10.284l-4.07 3.729a.667.667 0 10.904.979l5.333-4.889a.667.667 0 000-.98L7.82 4.62a.667.667 0 00-.486-.18M11.743.002a.667.667 0 10.07 1.333h4.666v17.332h-4.666a.667.667 0 00-.02 1.334h5.353a.667.667 0 00.666-.667V.668a.667.667 0 00-.666-.666h-5.333a.635.635 0 00-.07 0" fill="#8A959E" fill-rule="evenodd"></path></svg></div>Реєстрація</a>{% endif %}
+            {% if user.is_authenticated %}<a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'main:logout' %}">Вийти</a>{% endif %}
+
           </nav>
     </div>
     <div class="container">
