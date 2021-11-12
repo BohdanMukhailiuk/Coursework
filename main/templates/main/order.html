@@ -15,6 +15,7 @@
                                     <p>{% if el.image %}
                                         <img src="{{ el.image.url }}" alt="media">
                                     {% endif %}</p>
+                                    <p>Електронна пошта для звязку: {{ el.email }}</p>
                                     <p>Назва предмету викладання: {{ el.subject }}</p>
                                     <p>Ціна заняття за годину: {{ el.price_per_hour }}</p>
                                     <p>Напрямок викладання: {{ el.specialization }}</p>
