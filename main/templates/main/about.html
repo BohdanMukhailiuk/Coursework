@@ -33,8 +33,10 @@
         {% if feedbacks %}
 
                 {% for elem in feedbacks %}
-                    {{ name }}
-                    <p>{{ elem.feedback }}</p>
+                    {% if elem.check == True %}
+                        {{ elem.name }}
+                        <p>{{ elem.feedback }}</p>
+                    {% endif %}
                 {% endfor %}
             {% endif %}
 
