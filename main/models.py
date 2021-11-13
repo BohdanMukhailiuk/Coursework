@@ -25,6 +25,8 @@ class Task(models.Model):
 
 class LeaveFeedBack(models.Model):
     feedback = models.TextField(verbose_name="Ви можете зилишити свій коментар тут", null=True)
-    name = models.CharField(verbose_name="ПІБ", max_length=100, null=True)
     check = models.BooleanField(default=False, null=True)
+    task = models.ForeignKey(Task, null=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+
 
