@@ -7,7 +7,7 @@ class ApproveCheckTask(admin.ModelAdmin):
 
 
 class ApproveCheckLeaveFeedBack(admin.ModelAdmin):
-    list_display = ('name', 'feedback', "check")
+    list_display = ('user', 'feedback', "check")
 
 
 admin.site.register(Task, ApproveCheckTask)
