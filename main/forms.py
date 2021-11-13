@@ -76,22 +76,13 @@ class SignUpForm(UserCreationForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
-    # email = forms.EmailField(label=('Enter your new email'), max_length=200)
-    #
-    # def __init__(self, user, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.user = user
-    #
-    # def save(self):
-    #     self.user.email = self.cleaned_data['email']
-    #     self.user.save()
 
 
 
 class LeaveFeedBackForm(ModelForm):
     class Meta:
         model = LeaveFeedBack
-        fields = ("feedback", "check", "name", )
+        fields = ("feedback", "check", )
         widgets = {
 
             "feedback": Textarea(attrs={
@@ -102,12 +93,6 @@ class LeaveFeedBackForm(ModelForm):
             "check": CheckboxInput(attrs={
                 "class": "form-control",
             }),
-
-            "name": TextInput(attrs={
-                "class": "form-control",
-                "placeholder": "Введіть ваше ПІБ"
-            }),
-
 
         }
 
