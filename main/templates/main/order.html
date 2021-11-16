@@ -7,8 +7,8 @@
 
 {% block content %}
         <h1>Замовити репетитора</h1>
-        {% if tasks %}
-                {% for el in tasks %}
+        {% if listings %}
+                {% for el in listings %}
                         {% if el.check == True %}
                                 <div class="alert alert-warning mt-2">
                                     <h3>{{ el.last_name }} {{ el.first_name }} {{ el.surname }}</h3>
@@ -16,8 +16,8 @@
                                         <img src="{{ el.image.url }}" alt="media">
                                     {% endif %}</p>
                                     <p>Електронна пошта для звязку: {{ el.email }}</p>
-                                    <p>Назва предмету викладання: {{ el.subject }}</p>
-                                    <p>Ціна заняття за годину: {{ el.price_per_hour }}</p>
+                                    <p>Назва предмету викладання: {{ el.choose_subject }}</p>
+                                    <p>Ціна заняття за годину у грн: {{ el.price_per_hour }}</p>
                                     <p>Напрямок викладання: {{ el.specialization }}</p>
                                     <p>Стаж роботи: {{ el.experience }}</p>
                                     <p>Додаткова інформація: {{ el.extra_information }}</p>
