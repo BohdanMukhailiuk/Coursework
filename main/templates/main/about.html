@@ -15,10 +15,10 @@
                                     <p>{% if el.image %}
                                         <img src="{{ el.image.url }}" alt="media">
                                     {% endif %}</p>
-                                    <p>Назва предмету викладання: {{ el.choose_subject }}</p>
+{#                                    <p>Назва предмету викладання: {{ el.choose_subject }}</p>#}
                                     <p>Ціна заняття за годину у грн: {{ el.price_per_hour }}</p>
                                     <p>Напрямок викладання: {{ el.specialization }}</p>
-                                    <p>Стаж роботи: {{ el.experience }}</p>
+                                    <p>Стаж роботи як репетитор(у місяцях): {{ el.experience }}</p>
                                     <p>Додаткова інформація: {{ el.extra_information }}</p>
                                     <div><a href="{% url 'main:comment' pk=el.pk %}">Залишити коментар</a></div>
                                 </div>
