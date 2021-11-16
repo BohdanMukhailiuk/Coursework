@@ -4,10 +4,12 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ["first_name", "last_name", "surname", "subject", "price_per_hour", "specialization", "experience", "extra_information", "check", "image", "email"]
+        fields = ["first_name", "last_name", "surname", "check", "email", "choose_subject", "price_per_hour",
+                  "specialization", "experience", "extra_information",  "image"]
         widgets = {
 
             "last_name": TextInput(attrs={
@@ -25,14 +27,19 @@ class TaskForm(ModelForm):
                 "placeholder": "Введіть ваше ім'я по батькові"
             }),
 
-            "subject": TextInput(attrs={
+            "email": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Введіть електронну пошту для зв'язку"
+            }),
+
+            "choose_subject": TextInput(attrs={
                 "class": "form-control",
                 "placeholder": "Введіть предмет, який викладатимете"
             }),
 
             "price_per_hour": TextInput(attrs={
                 "class": "form-control",
-                "placeholder": "Введіть ціну вашого заняття за годину"
+                "placeholder": "Введіть ціну вашого заняття за годину у гривнях"
             }),
 
             "specialization": TextInput(attrs={
@@ -50,15 +57,9 @@ class TaskForm(ModelForm):
                 "placeholder": "Введіть додаткову інформацію про себе"
             }),
 
-            "check": CheckboxInput(attrs={
-                "class": "form-control",
-            }),
-
-            "email": TextInput(attrs={
-                "class": "form-control",
-                "placeholder": "Введіть електронну пошту для зв'язку"
-            }),
-
+            # "check": CheckboxInput(attrs={
+            #     "class": "form-control",
+            # }),
 
         }
 
@@ -76,7 +77,6 @@ class SignUpForm(UserCreationForm):
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
-
 
 
 class LeaveFeedBackForm(ModelForm):
