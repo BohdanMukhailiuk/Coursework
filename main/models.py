@@ -18,11 +18,11 @@ class Task(models.Model):
     last_name = models.CharField(verbose_name="Прізвище", max_length=50)
     first_name = models.CharField(verbose_name="Ім'я", max_length=50)
     surname = models.CharField(verbose_name="По батькові", max_length=50)
-    choose_subject = models.CharField(verbose_name="Назва предмету викладання", max_length=16, choices=Select_Subject,
-                                      null=True)
+    # choose_subject = models.CharField(verbose_name="Назва предмету викладання", max_length=16, choices=Select_Subject,
+    #                                   null=True)
     price_per_hour = models.CharField(verbose_name="Ціна заняття за годину у грн", max_length=50)
     specialization = models.CharField(verbose_name="Напрямок викладання", max_length=50)
-    experience = models.CharField(verbose_name="Стаж роботи", max_length=50)
+    experience = models.IntegerField(verbose_name="Стаж роботи(у місяцях)")
     extra_information = models.TextField(verbose_name="Додаткова інформація")
     check = models.BooleanField(default=False)
     email = models.EmailField(verbose_name="Електронна пошта", max_length=254, null=True)
