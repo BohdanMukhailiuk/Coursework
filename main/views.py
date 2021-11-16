@@ -17,7 +17,12 @@ class CustomLoginView(LoginView):
 
 
 def index(request):
-    return render(request, "main/index.html")
+
+    context = {
+        "title": "Головна сторінка сайту",
+
+    }
+    return render(request, "main/index.html", context)
 
 
 def about(request, pk):
@@ -63,9 +68,31 @@ def comment(request, pk):
 
 def order(request):
     tasks = Task.objects.order_by("id")
+    if request.GET.get('price_per_hour'):
+        price_per_hour_filter = request.GET.get('price_per_hour')
+        print(price_per_hour_filter)
+
+        if "+" in price_per_hour_filter:
+            prices = price_per_hour_filter[:-1]
+            print(prices)
+            min_price = int(prices[0])
+            max_price = int(prices[0]*10)
+        else:
+            prices = price_per_hour_filter.split("-")
+            print(prices)
+            min_price = int(prices[0])
+            max_price = int(prices[1])
+
+        listings = Task.objects.filter(price_per_hour__range=(min_price, max_price), )
+        print(listings)
+
+    else:
+        listings = Task.objects.all()
+
     context = {
         "title": "Головна сторінка сайту",
-        "tasks": tasks
+        "tasks": tasks,
+        'listings': listings
     }
     return render(request, "main/order.html", context)
 
@@ -74,6 +101,7 @@ def teachers(request):
     error = ''
     if request.method == "POST":
         form = TaskForm(request.POST)
+        print(Task.objects.all())
         if form.is_valid():
             form.save()
             return redirect('main:home')
