@@ -3,12 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from .models import Task, LeaveFeedBack
 from .forms import TaskForm, LeaveFeedBackForm
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import SignUpForm
-from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -17,11 +14,11 @@ class CustomLoginView(LoginView):
 
 
 def index(request):
-
     context = {
         "title": "Головна сторінка сайту",
 
     }
+
     return render(request, "main/index.html", context)
 
 
@@ -68,22 +65,32 @@ def comment(request, pk):
 
 def order(request):
     tasks = Task.objects.order_by("id")
+    min_exp = 0
+    max_exp = 100000000000000
+    min_price = 0
+    max_price = 10000000000000
+
+    if request.GET.get('experience'):
+        experience_filter = request.GET.get('experience')
+        print(experience_filter.split("-"))
+        min_exp = int(experience_filter.split("-")[0])
+        max_exp = int(experience_filter.split("-")[1].split(" ")[0])
+        print(min_exp)
+        print(max_exp)
+
     if request.GET.get('price_per_hour'):
         price_per_hour_filter = request.GET.get('price_per_hour')
         print(price_per_hour_filter)
 
         if "+" in price_per_hour_filter:
             prices = price_per_hour_filter[:-1]
-            print(prices)
             min_price = int(prices[0])
             max_price = int(prices[0]*10)
         else:
             prices = price_per_hour_filter.split("-")
-            print(prices)
             min_price = int(prices[0])
             max_price = int(prices[1])
-
-        listings = Task.objects.filter(price_per_hour__range=(min_price, max_price), )
+        listings = Task.objects.filter(price_per_hour__range=(min_price, max_price), experience__range=(min_exp, max_exp))
         print(listings)
 
     else:
@@ -94,6 +101,7 @@ def order(request):
         "tasks": tasks,
         'listings': listings
     }
+
     return render(request, "main/order.html", context)
 
 
