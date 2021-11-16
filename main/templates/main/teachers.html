@@ -15,11 +15,11 @@
                 {{ form.first_name }}<br>
                 {{ form.surname }}<br>
                 {{ form.email }}<br>
-                <select>
-                    {% for id, name in form.choose_subject.field.choices %}
-                    <option value="{{ id }}">{{ name }}</option>
-                    {% endfor %}
-                </select><br>
+{#                <select>#}
+{#                    {% for id, name in form.choose_subject.field.choices %}#}
+{#                    <option value="{{ id }}">{{ name }}</option>#}
+{#                    {% endfor %}#}
+{#                </select><br>#}
                 <br>{{ form.price_per_hour }}<br>
                 {{ form.specialization }}<br>
                 {{ form.experience }}<br>
