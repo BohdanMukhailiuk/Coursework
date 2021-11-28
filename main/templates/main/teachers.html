@@ -15,12 +15,14 @@
                 {{ form.first_name }}<br>
                 {{ form.surname }}<br>
                 {{ form.email }}<br>
+                Виберіть предмет з переліних: Алгебра, Геомітрія, Англійська мова, Французька мова, Німецька мова, Українська мова, Географія, Фізика, Хімія
 {#                <select>#}
 {#                    {% for id, name in form.choose_subject.field.choices %}#}
 {#                    <option value="{{ id }}">{{ name }}</option>#}
 {#                    {% endfor %}#}
 {#                </select><br>#}
-                <br>{{ form.price_per_hour }}<br>
+                {{ form.choose_subject }}<br>
+                {{ form.price_per_hour }}<br>
                 {{ form.specialization }}<br>
                 {{ form.experience }}<br>
                 {{ form.extra_information }}<br>
