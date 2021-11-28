@@ -69,8 +69,13 @@ def order(request):
     max_exp = 100000000000000
     min_price = 0
     max_price = 10000000000000
+    choose_subject_filter = request.GET.get("choose_subject")
+    listings = Task.objects.all()
 
-    if request.GET.get('experience'):
+    if request.GET.get('price_per_hour') and request.GET.get('choose_subject') and request.GET.get('experience'):
+        choose_subject_filter = request.GET.get("choose_subject")
+        print(choose_subject_filter)
+
         experience_filter = request.GET.get('experience')
         print(experience_filter.split("-"))
         min_exp = int(experience_filter.split("-")[0])
@@ -78,28 +83,109 @@ def order(request):
         print(min_exp)
         print(max_exp)
 
-    if request.GET.get('price_per_hour'):
         price_per_hour_filter = request.GET.get('price_per_hour')
         print(price_per_hour_filter)
 
         if "+" in price_per_hour_filter:
             prices = price_per_hour_filter[:-1]
             min_price = int(prices[0])
-            max_price = int(prices[0]*10)
+            max_price = int(prices[0] * 10)
         else:
             prices = price_per_hour_filter.split("-")
             min_price = int(prices[0])
             max_price = int(prices[1])
-        listings = Task.objects.filter(price_per_hour__range=(min_price, max_price), experience__range=(min_exp, max_exp))
-        print(listings)
 
-    else:
-        listings = Task.objects.all()
+        listings = Task.objects.filter(choose_subject__contains=choose_subject_filter,
+                                       experience__range=(min_exp, max_exp),
+                                       price_per_hour__range=(min_price, max_price))
+
+    elif request.GET.get('price_per_hour') and request.GET.get('choose_subject'):
+        choose_subject_filter = request.GET.get("choose_subject")
+        print(choose_subject_filter)
+
+        price_per_hour_filter = request.GET.get('price_per_hour')
+        print(price_per_hour_filter)
+
+        if "+" in price_per_hour_filter:
+            prices = price_per_hour_filter[:-1]
+            min_price = int(prices[0])
+            max_price = int(prices[0] * 10)
+        else:
+            prices = price_per_hour_filter.split("-")
+            min_price = int(prices[0])
+            max_price = int(prices[1])
+
+        listings = Task.objects.filter(choose_subject__contains=choose_subject_filter,
+                                       price_per_hour__range=(min_price, max_price),)
+
+    elif request.GET.get('price_per_hour') and request.GET.get('experience'):
+        price_per_hour_filter = request.GET.get('price_per_hour')
+        print(price_per_hour_filter)
+
+        if "+" in price_per_hour_filter:
+            prices = price_per_hour_filter[:-1]
+            min_price = int(prices[0])
+            max_price = int(prices[0] * 10)
+        else:
+            prices = price_per_hour_filter.split("-")
+            min_price = int(prices[0])
+            max_price = int(prices[1])
+
+        experience_filter = request.GET.get('experience')
+        print(experience_filter.split("-"))
+        min_exp = int(experience_filter.split("-")[0])
+        max_exp = int(experience_filter.split("-")[1].split(" ")[0])
+        print(min_exp)
+        print(max_exp)
+
+        listings = Task.objects.filter(price_per_hour__range=(min_price, max_price),
+                                       experience__range=(min_exp, max_exp),)
+
+    elif request.GET.get('choose_subject') and request.GET.get('experience'):
+        choose_subject_filter = request.GET.get("choose_subject")
+
+        print(choose_subject_filter)
+        experience_filter = request.GET.get('experience')
+        print(experience_filter.split("-"))
+        min_exp = int(experience_filter.split("-")[0])
+        max_exp = int(experience_filter.split("-")[1].split(" ")[0])
+        print(min_exp)
+        print(max_exp)
+
+        listings = Task.objects.filter(choose_subject__contains=choose_subject_filter,
+                                       experience__range=(min_exp, max_exp),)
+
+    elif request.GET.get('choose_subject'):
+        choose_subject_filter = request.GET.get("choose_subject")
+        listings = Task.objects.filter(choose_subject__contains=choose_subject_filter)
+
+    elif request.GET.get('experience'):
+        experience_filter = request.GET.get('experience')
+        print(experience_filter.split("-"))
+        min_exp = int(experience_filter.split("-")[0])
+        max_exp = int(experience_filter.split("-")[1].split(" ")[0])
+        print(min_exp)
+        print(max_exp)
+        listings = Task.objects.filter(experience__range=(min_exp, max_exp))
+
+    elif request.GET.get('price_per_hour'):
+        price_per_hour_filter = request.GET.get('price_per_hour')
+        print(price_per_hour_filter)
+
+        if "+" in price_per_hour_filter:
+            prices = price_per_hour_filter[:-1]
+            min_price = int(prices[0])
+            max_price = int(prices[0] * 10)
+        else:
+            prices = price_per_hour_filter.split("-")
+            min_price = int(prices[0])
+            max_price = int(prices[1])
+        listings = Task.objects.filter(price_per_hour__range=(min_price, max_price))
 
     context = {
         "title": "Головна сторінка сайту",
         "tasks": tasks,
-        'listings': listings
+        'listings': listings,
     }
 
     return render(request, "main/order.html", context)
