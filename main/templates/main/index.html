@@ -6,11 +6,58 @@
 
 
 {% block content %}
-        <h1>Головна сторінка</h1>
-        <p>Головна сторінка</p>
+{#        <h1>Головна сторінка</h1>#}
+{#        <p>На цій сторінці ви можете зробити сортування по категоріям яким бажаєте</p>#}
+        <div class="py-4 jumbo-pattern text-center">
+            <div class="container pb-4 text-left text-black">
+                <div class="h2 py-5 text-black text-center">
+                    <strong>
+                        Чому варто обрати Bodia_company
+                    </strong>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-11 col-sm-12 col-md-6 offset-md-0&nbsp;col-lg-5 offset-lg-1&nbsp;pb-5">
+                        <p class="h3">Потужний викладацький склад</p>
+                        <p>У нашій компанії працюють найкращі викладачі України, призери олімпіадних змагань, переможці міжнародних конкурсів, висококваліфіковані студенти. Це дозволяє нам забезпечувати якісну викладацьку роботу нашої компанії.</p>
+                    </div>
 
+                    <div class="col-11 col-sm-12 col-md-6 offset-md-0&nbsp;col-lg-5 offset-lg-1&nbsp;pb-5">
+                        <p class="h3">У вас є можливість стати репетитором</p>
+                        <p>Якщо ви володієте хорошими викладацькими навиками та високим рівнем знань, то можете стати репетитором на нашому сайті та навчати відвідувачів сайту, для цього необхідно зареєструватись на нашому сайті та увійти в свій кабінет і заповнити форму.</p>
+                    </div>
+
+                    <div class="col-11 col-sm-12 col-md-6 offset-md-0&nbsp;col-lg-5 offset-lg-1&nbsp;pb-5">
+                        <p class="h3">Можливість прочитати детальну інформацію про викладача та залишити відкгук</p>
+                        <p>Всі учасники можуть детельно ознайомитись з інформацією про репеторів, яких ми вам пропонуємо, а також прочитати чи зашити їм відгук.</p>
+                    </div>
+
+                    <div class="col-11 col-sm-12 col-md-6 offset-md-0&nbsp;col-lg-5 offset-lg-1&nbsp;pb-5">
+                        <p class="h3">Можливість обрати репетитора за певним критерієм</p>
+                        <p>Ви можете обрати вашого репетитора, за допомогою функції сортування, по певних критеріях. Для цього на головній сторінці вам необхідно обати категорії за якими ви шукаєте викладача та натиснути кнопку пошук.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <form action="{% url 'main:order' %}" method="get">
+
+    <label for="choose_subject">Сортування за назвою премета викладання</label>
+
+        <select name="choose_subject">
+            <option></option>
+            <option>Алгебра</option>
+            <option>Геометрія</option>
+            <option>Англійська мова</option>
+            <option>Французька мова</option>
+            <option>Німецька мова</option>
+            <option>Українська мова</option>
+            <option>Географія</option>
+            <option>Фізика</option>
+            <option>Хімія</option>
+
+        </select><br>
+
+
     <label for="price_per_hour">Сортування по ціні у грн</label>
 
         <select name="price_per_hour">
@@ -23,7 +70,7 @@
 
         </select><br>
 
-    <label for="price_per_hour">Сортування по стажу роботи як репетитор</label>
+    <label for="experience">Сортування по стажу роботи як репетитор</label>
 
         <select name="experience">
             <option></option>
@@ -34,8 +81,13 @@
             <option>36+  місяців</option>
 
         </select><br>
+        <br>
 
-    <input type="submit" value="Пошук" />
+
+
+
+
+    <input class="search" type="submit" value="Пошук" />
 
     </form>
 
