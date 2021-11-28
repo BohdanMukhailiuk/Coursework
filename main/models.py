@@ -2,24 +2,23 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-Select_Subject = (
-    ('Математика', 'Математика'),
-    ('Англійська мова', 'Англійська мова'),
-    ('Українська мова', 'Українська мова'),
-    ('Фізика', 'Фізика'),
-    ('Хімія', 'Хімія'),
-    ('Французька', 'Французька'),
-
-)
+# Select_Subject = (
+#     ('Математика', 'Математика'),
+#     ('Англійська мова', 'Англійська мова'),
+#     ('Українська мова', 'Українська мова'),
+#     ('Фізика', 'Фізика'),
+#     ('Хімія', 'Хімія'),
+#     ('Французька', 'Французька'),
+#
+# )
 
 
 class Task(models.Model):
-    image = models.ImageField(verbose_name='Зображення', blank=True)
+    image = models.ImageField(blank=True)
     last_name = models.CharField(verbose_name="Прізвище", max_length=50)
     first_name = models.CharField(verbose_name="Ім'я", max_length=50)
     surname = models.CharField(verbose_name="По батькові", max_length=50)
-    # choose_subject = models.CharField(verbose_name="Назва предмету викладання", max_length=16, choices=Select_Subject,
-    #                                   null=True)
+    choose_subject = models.CharField(verbose_name="Предмет", max_length=16, null=True)
     price_per_hour = models.CharField(verbose_name="Ціна заняття за годину у грн", max_length=50)
     specialization = models.CharField(verbose_name="Напрямок викладання", max_length=50)
     experience = models.IntegerField(verbose_name="Стаж роботи(у місяцях)")
