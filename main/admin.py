@@ -3,8 +3,8 @@ from .models import Task
 from .models import LeaveFeedBack
 
 class ApproveCheckTask(admin.ModelAdmin):
-    list_display = ("last_name", "first_name", "surname", "price_per_hour", "specialization", "experience",
-                    "extra_information", "check", 'image')
+    list_display = ("last_name", "first_name", "surname", "choose_subject", "price_per_hour", "specialization",
+                    "experience", "extra_information", "check", 'image')
 
 
 class ApproveCheckLeaveFeedBack(admin.ModelAdmin):
