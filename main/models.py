@@ -14,7 +14,7 @@ from django.db import models
 
 
 class Task(models.Model):
-    image = models.ImageField(blank=True)
+    image = models.ImageField(upload_to='images', blank=True)
     last_name = models.CharField(verbose_name="Прізвище", max_length=50)
     first_name = models.CharField(verbose_name="Ім'я", max_length=50)
     surname = models.CharField(verbose_name="По батькові", max_length=50)

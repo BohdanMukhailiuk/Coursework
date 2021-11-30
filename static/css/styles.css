@@ -32,3 +32,18 @@ footer {
 .search{
     margin-bottom: 20px;
 }
+
+.filter{
+    /*background-color: blue;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/*.select1{*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: center;*/
+/*}*/
+
+

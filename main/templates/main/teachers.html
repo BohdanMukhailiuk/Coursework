@@ -7,25 +7,27 @@
 
 {% block content %}
         <h1>Стати репетитором</h1>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <br>
-                {{ form.image }}<br>
-                {{ form.last_name }}<br>
-                {{ form.first_name }}<br>
-                {{ form.surname }}<br>
-                {{ form.email }}<br>
-                Виберіть предмет з переліних: Алгебра, Геомітрія, Англійська мова, Французька мова, Німецька мова, Українська мова, Географія, Фізика, Хімія
+{#                <br>#}
+{#                {{ form.image }}<br>#}
+{#                {{ form.last_name }}<br>#}
+{#                {{ form.first_name }}<br>#}
+{#                {{ form.surname }}<br>#}
+{#                {{ form.email }}<br>#}
+{#                Виберіть один предмет з переліних: Алгебра, Геомітрія, Англійська мова, Французька мова, Німецька мова, Українська мова, Географія, Фізика, Хімія#}
 {#                <select>#}
 {#                    {% for id, name in form.choose_subject.field.choices %}#}
 {#                    <option value="{{ id }}">{{ name }}</option>#}
 {#                    {% endfor %}#}
 {#                </select><br>#}
-                {{ form.choose_subject }}<br>
-                {{ form.price_per_hour }}<br>
-                {{ form.specialization }}<br>
-                {{ form.experience }}<br>
-                {{ form.extra_information }}<br>
+{#                {{ form.choose_subject }}<br>#}
+{#                {{ form.price_per_hour }}<br>#}
+{#                Виберіть напрямок занять з переліних(можна обирати декілька): ЗНО, ДПА, Шкільні теми, Підготовка до олімпіад#}
+{#                {{ form.specialization }}<br>#}
+{#                {{ form.experience }}<br>#}
+{#                {{ form.extra_information }}<br>#}
+                 {{ form.as_p }}
                 <button type="submit" class="btn btn-success">Додати</button>
                 <span>{{ error }}</span>
         </form>

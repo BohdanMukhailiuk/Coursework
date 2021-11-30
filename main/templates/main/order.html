@@ -7,6 +7,9 @@
 
 {% block content %}
         <h1>Замовити репетитора</h1>
+        {% if request.user.is_staff %}
+            <a href="{% url 'export_products_csv' %}">Завантажити всю інформацію про викладачів</a>
+        {% endif %}
         {% if listings %}
                 {% for el in listings %}
                         {% if el.check == True %}
@@ -22,7 +25,11 @@
                                     <p>Стаж роботи як репетитор(у місяцях): {{ el.experience }}</p>
                                     <p>Додаткова інформація: {{ el.extra_information }}</p>
                                     <div><a href="{% url 'main:about' pk=el.pk %}">Переглянути коментарі</a></div>
-                                    <div><a href="{% url 'main:comment' pk=el.pk %}">Залишити коментар</a></div>
+                                    {% if user.is_authenticated %}
+                                        <div>
+                                            <a href="{% url 'main:comment' pk=el.pk %}">Залишити коментар</a>
+                                        </div>
+                                    {% endif %}
                                 </div>
                         {% endif %}
                 {% endfor %}

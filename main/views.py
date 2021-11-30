@@ -1,6 +1,10 @@
+import csv
+
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
+from django.http import HttpResponse
+
 from .models import Task, LeaveFeedBack
 from .forms import TaskForm, LeaveFeedBackForm
 from django.contrib.auth.forms import UserCreationForm
@@ -70,9 +74,17 @@ def order(request):
     min_price = 0
     max_price = 10000000000000
     choose_subject_filter = request.GET.get("choose_subject")
+    specialization = request.GET.get("specialization")
+# 0
     listings = Task.objects.all()
 
-    if request.GET.get('price_per_hour') and request.GET.get('choose_subject') and request.GET.get('experience'):
+# 1
+    if request.GET.get('price_per_hour') and request.GET.get('choose_subject') and request.GET.get('experience') \
+            and request.GET.get('specialization'):
+
+        specialization_filter = request.GET.get("specialization")
+        print(specialization_filter)
+
         choose_subject_filter = request.GET.get("choose_subject")
         print(choose_subject_filter)
 
@@ -97,8 +109,110 @@ def order(request):
 
         listings = Task.objects.filter(choose_subject__contains=choose_subject_filter,
                                        experience__range=(min_exp, max_exp),
-                                       price_per_hour__range=(min_price, max_price))
+                                       price_per_hour__range=(min_price, max_price),
+                                       specialization__contains=specialization_filter)
 
+# 2
+    elif request.GET.get('price_per_hour') and request.GET.get('choose_subject') and request.GET.get('experience'):
+
+        choose_subject_filter = request.GET.get("choose_subject")
+        print(choose_subject_filter)
+
+        experience_filter = request.GET.get('experience')
+        print(experience_filter.split("-"))
+        min_exp = int(experience_filter.split("-")[0])
+        max_exp = int(experience_filter.split("-")[1].split(" ")[0])
+        print(min_exp)
+        print(max_exp)
+
+        price_per_hour_filter = request.GET.get('price_per_hour')
+        print(price_per_hour_filter)
+
+        if "+" in price_per_hour_filter:
+            prices = price_per_hour_filter[:-1]
+            min_price = int(prices[0])
+            max_price = int(prices[0] * 10)
+        else:
+            prices = price_per_hour_filter.split("-")
+            min_price = int(prices[0])
+            max_price = int(prices[1])
+
+        listings = Task.objects.filter(choose_subject__contains=choose_subject_filter,
+                                       experience__range=(min_exp, max_exp),
+                                       price_per_hour__range=(min_price, max_price), )
+# 3
+    elif request.GET.get('price_per_hour') and request.GET.get('choose_subject') and request.GET.get('specialization'):
+
+        specialization_filter = request.GET.get("specialization")
+        print(specialization_filter)
+
+        choose_subject_filter = request.GET.get("choose_subject")
+        print(choose_subject_filter)
+
+        price_per_hour_filter = request.GET.get('price_per_hour')
+        print(price_per_hour_filter)
+
+        if "+" in price_per_hour_filter:
+            prices = price_per_hour_filter[:-1]
+            min_price = int(prices[0])
+            max_price = int(prices[0] * 10)
+        else:
+            prices = price_per_hour_filter.split("-")
+            min_price = int(prices[0])
+            max_price = int(prices[1])
+
+        listings = Task.objects.filter(choose_subject__contains=choose_subject_filter,
+                                       price_per_hour__range=(min_price, max_price),
+                                       specialization__contains=specialization_filter)
+# 4
+    elif request.GET.get('choose_subject') and request.GET.get('experience') and request.GET.get('specialization'):
+
+        specialization_filter = request.GET.get("specialization")
+        print(specialization_filter)
+
+        choose_subject_filter = request.GET.get("choose_subject")
+        print(choose_subject_filter)
+
+        experience_filter = request.GET.get('experience')
+        print(experience_filter.split("-"))
+        min_exp = int(experience_filter.split("-")[0])
+        max_exp = int(experience_filter.split("-")[1].split(" ")[0])
+        print(min_exp)
+        print(max_exp)
+
+        listings = Task.objects.filter(choose_subject__contains=choose_subject_filter,
+                                       experience__range=(min_exp, max_exp),
+                                       specialization__contains=specialization_filter)
+# 5
+    elif request.GET.get('price_per_hour') and request.GET.get('experience') and request.GET.get('specialization'):
+
+        specialization_filter = request.GET.get("specialization")
+        print(specialization_filter)
+
+        experience_filter = request.GET.get('experience')
+        print(experience_filter.split("-"))
+        min_exp = int(experience_filter.split("-")[0])
+        max_exp = int(experience_filter.split("-")[1].split(" ")[0])
+        print(min_exp)
+        print(max_exp)
+
+        price_per_hour_filter = request.GET.get('price_per_hour')
+        print(price_per_hour_filter)
+
+        if "+" in price_per_hour_filter:
+            prices = price_per_hour_filter[:-1]
+            min_price = int(prices[0])
+            max_price = int(prices[0] * 10)
+        else:
+            prices = price_per_hour_filter.split("-")
+            min_price = int(prices[0])
+            max_price = int(prices[1])
+
+        listings = Task.objects.filter(experience__range=(min_exp, max_exp),
+                                       price_per_hour__range=(min_price, max_price),
+                                       specialization__contains=specialization_filter)
+
+# 6
     elif request.GET.get('price_per_hour') and request.GET.get('choose_subject'):
         choose_subject_filter = request.GET.get("choose_subject")
         print(choose_subject_filter)
@@ -116,8 +230,8 @@ def order(request):
             max_price = int(prices[1])
 
         listings = Task.objects.filter(choose_subject__contains=choose_subject_filter,
-                                       price_per_hour__range=(min_price, max_price),)
-
+                                       price_per_hour__range=(min_price, max_price), )
+# 7
     elif request.GET.get('price_per_hour') and request.GET.get('experience'):
         price_per_hour_filter = request.GET.get('price_per_hour')
         print(price_per_hour_filter)
@@ -139,12 +253,33 @@ def order(request):
         print(max_exp)
 
         listings = Task.objects.filter(price_per_hour__range=(min_price, max_price),
-                                       experience__range=(min_exp, max_exp),)
+                                       experience__range=(min_exp, max_exp), )
+# 8
+    elif request.GET.get('price_per_hour') and request.GET.get('specialization'):
+        price_per_hour_filter = request.GET.get('price_per_hour')
+        print(price_per_hour_filter)
 
+        if "+" in price_per_hour_filter:
+            prices = price_per_hour_filter[:-1]
+            min_price = int(prices[0])
+            max_price = int(prices[0] * 10)
+        else:
+            prices = price_per_hour_filter.split("-")
+            min_price = int(prices[0])
+            max_price = int(prices[1])
+
+        specialization_filter = request.GET.get('specialization')
+
+        listings = Task.objects.filter(specialization__contains=specialization_filter,
+                                       price_per_hour__range=(min_price, max_price), )
+
+
+
+# 9
     elif request.GET.get('choose_subject') and request.GET.get('experience'):
         choose_subject_filter = request.GET.get("choose_subject")
-
         print(choose_subject_filter)
+
         experience_filter = request.GET.get('experience')
         print(experience_filter.split("-"))
         min_exp = int(experience_filter.split("-")[0])
@@ -153,12 +288,40 @@ def order(request):
         print(max_exp)
 
         listings = Task.objects.filter(choose_subject__contains=choose_subject_filter,
-                                       experience__range=(min_exp, max_exp),)
+                                       experience__range=(min_exp, max_exp), )
 
+# 10
+    elif request.GET.get('specialization') and request.GET.get('experience'):
+        specialization_filter = request.GET.get("specialization")
+
+        experience_filter = request.GET.get('experience')
+        print(experience_filter.split("-"))
+        min_exp = int(experience_filter.split("-")[0])
+        max_exp = int(experience_filter.split("-")[1].split(" ")[0])
+        print(min_exp)
+        print(max_exp)
+
+        listings = Task.objects.filter(specialization__contains=specialization_filter,
+                                       experience__range=(min_exp, max_exp), )
+
+# 11
+    elif request.GET.get('choose_subject') and request.GET.get('specialization'):
+        choose_subject_filter = request.GET.get("choose_subject")
+        specialization_filter = request.GET.get('specialization')
+
+        listings = Task.objects.filter(choose_subject__contains=choose_subject_filter,
+                                       specialization__contains=specialization_filter,)
+
+# 12
+    elif request.GET.get('specialization'):
+        specialization_filter = request.GET.get("specialization")
+        listings = Task.objects.filter(specialization__contains=specialization_filter)
+
+# 13
     elif request.GET.get('choose_subject'):
         choose_subject_filter = request.GET.get("choose_subject")
         listings = Task.objects.filter(choose_subject__contains=choose_subject_filter)
-
+# 14
     elif request.GET.get('experience'):
         experience_filter = request.GET.get('experience')
         print(experience_filter.split("-"))
@@ -167,7 +330,7 @@ def order(request):
         print(min_exp)
         print(max_exp)
         listings = Task.objects.filter(experience__range=(min_exp, max_exp))
-
+# 15
     elif request.GET.get('price_per_hour'):
         price_per_hour_filter = request.GET.get('price_per_hour')
         print(price_per_hour_filter)
@@ -194,7 +357,7 @@ def order(request):
 def teachers(request):
     error = ''
     if request.method == "POST":
-        form = TaskForm(request.POST)
+        form = TaskForm(request.POST, request.FILES)
         print(Task.objects.all())
         if form.is_valid():
             form.save()
@@ -230,4 +393,20 @@ def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect("main:home")
+
+
+def export_products_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="products.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(["first_name", "last_name", "surname", "email", "choose_subject", "price_per_hour",
+                  "specialization", "experience", "extra_information"])
+
+    tasks = Task.objects.all().values_list("first_name", "last_name", "surname", "email", "choose_subject", "price_per_hour",
+                  "specialization", "experience", "extra_information")
+    for task in tasks:
+        writer.writerow(task)
+
+    return response
 

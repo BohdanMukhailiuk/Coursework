@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ["first_name", "last_name", "surname", "check", "email", "choose_subject", "price_per_hour",
-                  "specialization", "experience", "extra_information",  "image"]
+        fields = ["image", "first_name", "last_name", "surname", "email", "choose_subject", "price_per_hour",
+                  "specialization", "experience", "extra_information",]
         widgets = {
 
             "last_name": TextInput(attrs={
@@ -57,9 +57,6 @@ class TaskForm(ModelForm):
                 "placeholder": "Введіть додаткову інформацію про себе"
             }),
 
-            # "check": CheckboxInput(attrs={
-            #     "class": "form-control",
-            # }),
 
         }
 

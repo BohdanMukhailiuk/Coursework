@@ -1,4 +1,6 @@
 {% extends 'main/base.html' %}
+{% load static %}
+
 
 {% block title %}
 {{ title }}
@@ -39,26 +41,32 @@
             </div>
         </div>
 
-    <form action="{% url 'main:order' %}" method="get">
 
-    <label for="choose_subject">Сортування за назвою премета викладання</label>
+{#    <div class="filter">#}
+    <form class="filter" action="{% url 'main:order' %}" method="get">
+        <div class="select1">
+            <label for="choose_subject">
+                Сортування за назвою премета викладання
+            </label>
 
-        <select name="choose_subject">
-            <option></option>
-            <option>Алгебра</option>
-            <option>Геометрія</option>
-            <option>Англійська мова</option>
-            <option>Французька мова</option>
-            <option>Німецька мова</option>
-            <option>Українська мова</option>
-            <option>Географія</option>
-            <option>Фізика</option>
-            <option>Хімія</option>
+            <select name="choose_subject">
+                <option></option>
+                <option>Алгебра</option>
+                <option>Геометрія</option>
+                <option>Англійська мова</option>
+                <option>Французька мова</option>
+                <option>Німецька мова</option>
+                <option>Українська мова</option>
+                <option>Географія</option>
+                <option>Фізика</option>
+                <option>Хімія</option>
 
-        </select><br>
-
-
-    <label for="price_per_hour">Сортування по ціні у грн</label>
+            </select><br>
+        </div>
+    <div class="select1">
+        <label for="price_per_hour">
+            Сортування по ціні у грн
+        </label>
 
         <select name="price_per_hour">
             <option></option>
@@ -69,8 +77,25 @@
             <option>400+</option>
 
         </select><br>
+    </div>
+    <div class="select1">
+        <label for="specialization">
+            Сортування за напрямком занять
+        </label>
 
-    <label for="experience">Сортування по стажу роботи як репетитор</label>
+        <select name="specialization">
+            <option></option>
+            <option>ЗНО</option>
+            <option>ДПА</option>
+            <option>Підготовка до олімпіад</option>
+            <option>Шкільні теми</option>
+
+        </select><br>
+    </div>
+    <div class="select1">
+    <label for="experience">
+        Сортування по стажу роботи як репетитор
+    </label>
 
         <select name="experience">
             <option></option>
@@ -82,15 +107,11 @@
 
         </select><br>
         <br>
-
-
-
-
+    </div>
 
     <input class="search" type="submit" value="Пошук" />
 
     </form>
-
 
 
 
