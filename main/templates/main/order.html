@@ -13,7 +13,7 @@
         {% if listings %}
                 {% for el in listings %}
                         {% if el.check == True %}
-                                <div class="alert alert-warning mt-2">
+                                <div class="alert alert-warning mt-2" style="background-color:#97de6f; border: black solid">
                                     <h3>{{ el.last_name }} {{ el.first_name }} {{ el.surname }}</h3>
                                     <p>{% if el.image %}
                                         <img src="{{ el.image.url }}" alt="media">

@@ -1,13 +1,14 @@
 {% extends "main/base.html" %}
 
 {% block title %}
-    Log-in
+    Авторизація
 {% endblock %}
 
 {% block content %}
+
+    <form action="{% url 'main:login' %}" method="post" style="margin-top: 100px;">
     <h1>Log-in</h1>
     <p>Please, use the following form to log-in:</p>
-    <form action="{% url 'main:login' %}" method="post">
         {{ form.as_p }}
         {% csrf_token %}
         <p><input type="submit" value="Log-in"></p>

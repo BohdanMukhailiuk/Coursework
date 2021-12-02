@@ -2,17 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 
 
-# Select_Subject = (
-#     ('Математика', 'Математика'),
-#     ('Англійська мова', 'Англійська мова'),
-#     ('Українська мова', 'Українська мова'),
-#     ('Фізика', 'Фізика'),
-#     ('Хімія', 'Хімія'),
-#     ('Французька', 'Французька'),
-#
-# )
-
-
 class Task(models.Model):
     image = models.ImageField(upload_to='images', blank=True)
     last_name = models.CharField(verbose_name="Прізвище", max_length=50)
